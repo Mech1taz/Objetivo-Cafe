@@ -1,0 +1,58 @@
+/* Tipografía */
+body {
+  background-color: #F2F2F2; 
+  color: #261914;
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Playfair Display', serif;
+}
+p {
+  font-family: 'Montserrat', sans-serif;
+  color: #261914; 
+}
+body {
+  background-color: #F2F2F2; 
+  color: #261914;           
+}
+
+.navbar {
+  background-color: #261914 !important; 
+}
+
+.navbar-brand {
+  color: #A6634B !important; 
+}
+
+.navbar-brand:hover {
+  color: #A68B81 !important; 
+}
+
+.nav-link {
+  color: #F2F2F2 !important; 
+}
+
+.nav-link:hover {
+  color: #A6634B !important; 
+}
+
+/* Encabezados */
+h1, h4 {
+  color: #593831; 
+}
+
+/* Botones */
+.btn-primary {
+  background-color: #A6634B; 
+  border-color: #A6634B;
+}
+
+.btn-primary:hover {
+  background-color: #593831; 
+  border-color: #593831;
+}
+.bg-primary {
+  background-color: #A6634B !important; 
+  color: #F2F2F2 !important;            
+}
