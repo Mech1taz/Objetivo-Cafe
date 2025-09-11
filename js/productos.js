@@ -18,8 +18,45 @@ const productos = [
     precio: 10990,
     tipo: "cafe",
     opciones: ["Grano", "Molido - Italiana", "Molido - Prensa Francesa", "Molido - Filtro"],
-    imagen: "img/cafe_etiopia.png"
+    imagen: "img/Cafe_etiopia.png"
   },
+  {
+    id: 3,
+    nombre: "Café Honduras 250g",
+    descripcion: "Café en grano de origen colombiano, balanceado y aromático.",
+    precio: 14990,
+    tipo: "cafe",
+    opciones: ["Grano", "Molido - Italiana", "Molido - Prensa Francesa", "Molido - Filtro"],
+    imagen: "img/Cafe_honduras.png"
+  },
+  {
+    id: 4,
+    nombre: "Café Salvador Honey 250g",
+    descripcion: "Café en grano de origen colombiano, balanceado y aromático.",
+    precio: 14990,
+    tipo: "cafe",
+    opciones: ["Grano", "Molido - Italiana", "Molido - Prensa Francesa", "Molido - Filtro"],
+    imagen: "img/Salvador_honey.png"
+  },
+  {
+    id: 5,
+    nombre: "Café México 250g",
+    descripcion: "Café en grano de origen colombiano, balanceado y aromático.",
+    precio: 13990,
+    tipo: "cafe",
+    opciones: ["Grano", "Molido - Italiana", "Molido - Prensa Francesa", "Molido - Filtro"],
+    imagen: "img/Cafe_México.png"
+  },
+  {
+    id: 6,
+    nombre: "Café Descafeinado 250g",
+    descripcion: "Café en grano de origen colombiano, balanceado y aromático.",
+    precio: 11990,
+    tipo: "cafe",
+    opciones: ["Grano", "Molido - Italiana", "Molido - Prensa Francesa", "Molido - Filtro"],
+    imagen: "img/Cafe_descafeinado.png"
+  },
+  //cafeteras
   //id de las cafeteras desde el 101 al 200
   {
     id: 101,
