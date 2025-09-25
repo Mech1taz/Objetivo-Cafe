@@ -9,7 +9,7 @@ function agregarAlCarrito(nombre, opcion, cantidad, precio) {
     alert(`Producto agregado: ${nombre} (${opcion}) x${cantidad}`);
 }
 
-// Mostrar carrito en carrito.html
+// Llamar al carrito
 function mostrarCarrito() {
     const tabla = document.getElementById("tablaCarrito");
     if (!tabla) return;
