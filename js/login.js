@@ -1,29 +1,28 @@
-// En tu archivo login.js - modifica la redirección al final
-document.getElementById("formLogin").addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const mail = document.getElementById("mail").value;
-    const pass = document.getElementById("pass").value;
-
-    // Traer usuarios
-    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-
-    // Validar credenciales
-    const usuario = usuarios.find(u => u.mail === mail && u.pass === pass);
-
-    if (usuario) {
-        // Guardar sesión activa
-        localStorage.setItem("usuarioActivo", usuario.nom);
-        
-        alert(`Bienvenido ${usuario.nom}`);
-        
-        // Volver a la página anterior o a index.html si no hay historial
-        if (document.referrer && document.referrer.includes(window.location.hostname)) {
-            window.history.back();
+document.addEventListener("DOMContentLoaded", () => {
+    const formLogin = document.getElementById("formLogin");
+  
+    formLogin.addEventListener("submit", function (e) {
+      e.preventDefault();
+  
+      const email = document.getElementById("mail").value;
+      const pass = document.getElementById("pass").value;
+  
+      if (email && pass) {
+        // Guardar usuario
+        localStorage.setItem("usuario", email);
+        const nombre = email.split("@")[0];
+        localStorage.setItem("nombreUsuario", nombre);
+  
+        // Recuperar página anterior o ir al inicio
+        const paginaAnterior = localStorage.getItem("paginaAnterior");
+        if (paginaAnterior) {
+          window.location.href = paginaAnterior;
+          localStorage.removeItem("paginaAnterior"); // limpiamos
         } else {
-            window.location.href = "index.html";
+          window.location.href = "index.html";
         }
-    } else {
-        alert("Credenciales incorrectas");
-    }
-});
+      } else {
+        alert("Por favor completa todos los campos");
+      }
+    });
+  });

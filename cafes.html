@@ -29,6 +29,7 @@
                     <li class="nav-item"><a class="nav-link" href="cafeteras.html">Cafeteras</a></li>
                     <li class="nav-item"><a class="nav-link" href="accesorios.html">Accesorios</a></li>
                     <li class="nav-item"><a class="nav-link active" href="carrito.html">Carrito</a></li>
+                    <a id="login_link" class="nav-link" href="login.html">Iniciar Sesión</a>
                 </ul>
             </div>
         </div>
@@ -125,6 +126,21 @@
             </div>
         </div>
     </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+            const loginLink = document.getElementById("loginLink");
+        
+            loginLink.addEventListener("click", () => {
+                localStorage.setItem("paginaAnterior", window.location.href);
+            });
+        
+            const usuario = localStorage.getItem("nombreUsuario");
+            if (usuario) {
+                loginLink.textContent = usuario;
+                loginLink.href = "#";
+            }
+            });
+        </script>
 </body>
 
 </html>
