@@ -2,144 +2,90 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Objetivo café</title>
-    <!--agregue mi tipografia que me gustó :D-->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap"
-        rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/colores.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Objetivo Café - Inicio</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/colores.css" rel="stylesheet">
+  <style>
+    .hero {
+      background: url('img/fondo_cafe.jpg') center/cover no-repeat;
+      color: white;
+      padding: 6rem 2rem;
+      text-align: center;
+      box-shadow: inset 0 0 0 2000px rgba(38, 25, 20, 0.6);
+    }
 
-    <!-- Latest compiled JavaScript -->
-    <script src="js/bootstrap.bundle.min.js"></script>
+
+    .card {
+      border: none;
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.2);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .card img {
+      height: 220px;
+      object-fit: cover;
+    }
+  </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">Objetivo café</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="cafes.html">Café</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Cafeteras</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Accesorios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="blog.html">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Nosotros</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container">
-        <div class="col-lg">
-            <div class="mt-1 p-2 bg-light text-dark rounded text-center shadow">
-                <h1 class="display-1">Objetivo Café</h1>
-                <img src="img/Logo.svg" alt="logo" height="200vw">
-            </div>
-        </div>
-        <div class=" p-3 bg-primary text-white " style="background-color: #A6634B">
-            <h1 style="color: #F2F2F2;">Porque siempre siempre queremos café</h1>
-            <p style="color: #F2F2F2">Ese es nuestro objetivo..</p>
-        </div>
-        <div class="container-fluid">
-            <div class="row mt-4">
-                <div class="col-sm-4">
-                    <div class="card m-1 shadow">
-                        <img class="card-img-top" src="img/Cafe_etiopia.png" alt="Card image">
-                        <div class="card-body">
-                            <h4 class="card-title">Café Etiopia 500 gr</h4>
-                            <p class="card-text">Aroma a chocolate nuez con toque de caramelo achocolatado y fragancia
-                                cítrica naranja </p>
-                            <a href="registro.html" class="btn btn-primary">Añadir al carrito</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="card m-1 shadow">
-                        <img class="card-img-top" src="img/Cafe_honduras.png" alt="Card image">
-                        <div class="card-body">
-                            <h4 class="card-title">Café Honduras 250 gr</h4>
-                            <p class="card-text">Con un tueste medio,notas a azucar morena,dulce,frutos secos,acidez
-                                citrica a lima.</p>
-                            <a href="registro.html" class="btn btn-primary">Añadir al carrito</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="card m-1 shadow">
-                        <img class="card-img-top" src="img/Salvador_honey.png" alt="Card image">
-                        <div class="card-body">
-                            <h4 class="card-title">Café Salvador Honey 250 gr</h4>
-                            <p class="card-text">Fragante y aromático con matices dulces y cítricos con sabor bergamota,
-                                earl gray, yogurt de damasco y una acidez sutil.
+  <!-- Encabezado -->
+  <div class="hero" >
+    <h1 style="color: #F2F2F2;">Bienvenido a Objetivo Café</h1>
+    <p style="color: #F2F2F2;">Descubre el mundo del café y más</p>
+  </div>
 
-                            </p>
-                            <a href="registro.html" class="btn btn-primary">Añadir al carrito</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="card m-1 shadow">
-                        <img class="card-img-top" src="img/cafetera-francesa-lugano.jpg" alt="Card image">
-                        <div class="card-body">
-                            <h4 class="card-title">Cafetera francesa 600 ml</h4>
-                            <p class="card-text">La cafetera Cali 600 ml posee una magnífica prensa de acero inoxidable
-                                con cuerpo de vidrio borosilicato</p>
-                            <a href="registro.html" class="btn btn-primary">Añadir al carrito</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="card m-1 shadow">
-                        <img class="card-img-top" src="img/Prensa_bambu_1000ml.png" alt="Card image">
-                        <div class="card-body">
-                            <h4 class="card-title">Cafetera francesa bambú 1000 ml </h4>
-                            <p class="card-text">Cafetera de vidrio con filtro de acero inoxidable y soporte de madera
-                                de bambú.Cuerpo de vidrio borosilicato</p>
-                            <a href="registro.html" class="btn btn-primary">Añadir al carrito</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="card m-1 shadow">
-                        <img class="card-img-top" src="img/italiana 350ml.png" alt="Card image">
-                        <div class="card-body">
-                            <h4 class="card-title">Cafetera italiana 350 ml</h4>
-                            <p class="card-text">Cafetera para un café intenso, de 3 piezas (cafetera, filtro y
-                                recipiente de agua), materiales de aluminio y polipropileno </p>
-                            <a href="registro.html" class="btn btn-primary">Añadir al carrito</a>
-                        </div>
-                    </div>
-                </div>
-                <!--acá empezamos con los accesorios, se puede copiar todo y mover a una aparte-->
-                <div class="col-sm-4">
-                    <div class="card m-1 shadow">
-                        <img class="card-img-top" src="img/pesa_timer.png" alt="Card image">
-                        <div class="card-body">
-                            <h4 class="card-title">Pesa gramera</h4>
-                            <p class="card-text">Pesa gramera con timer, apagado automático. Recargable, no requiere
-                                baterías, incluye cable USB. Resistente al calor. </p>
-                            <a href="registro.html" class="btn btn-primary">Añadir al carrito</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- Opciones principales -->
+  <div class="container my-5">
+    <div class="row g-4">
+      <!-- Cafés -->
+      <div class="col-md-3">
+        <div class="card shadow">
+          <img src="img/Cafe_colombia.png" class="card-img-top" alt="Cafés">
+          <div class="card-body text-center">
+            <h5 class="card-title">Cafés</h5>
+            <a href="cafes.html" class="btn btn-primary">Ver más</a>
+          </div>
         </div>
-    </div>
-</body>
+      </div>
 
-</html>
+      <!-- Cafeteras -->
+      <div class="col-md-3">
+        <div class="card shadow">
+          <img src="img/italiana 350ml.png" class="card-img-top" alt="Cafeteras">
+          <div class="card-body text-center">
+            <h5 class="card-title">Cafeteras</h5>
+            <a href="cafeteras.html" class="btn btn-primary">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accesorios -->
+      <div class="col-md-3">
+        <div class="card shadow">
+          <img src="img/pesa_timemore.png" class="card-img-top" alt="Accesorios">
+          <div class="card-body text-center">
+            <h5 class="card-title">Accesorios</h5>
+            <a href="accesorios.html" class="btn btn-primary">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Blog -->
+      <div class="col-md-3">
+        <div class="card shadow">
+          <img src="img/taza_café.png" class="card-img-top" alt="Blog">
+          <div class="card-body text-center">
+            <h5 class="card-title">Blog</h5>
+            <a href="blog.html" class="btn btn-primary">Ver más</a>

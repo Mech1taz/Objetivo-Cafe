@@ -1,45 +1,42 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("formRegistro");
-  const checkpass = document.getElementById("checkpass");
-
-  form.addEventListener("submit", function (e) {
+document.getElementById("formRegistro").addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const rut = document.getElementById("rut").value.trim();
-    const nombre = document.getElementById("nom").value.trim();
+    const rut = document.getElementById("rut").value;
+    const nom = document.getElementById("nom").value;
     const pass = document.getElementById("pass").value;
     const repass = document.getElementById("repass").value;
-    const mail = document.getElementById("mail").value.trim();
+    const mail = document.getElementById("mail").value;
 
-    // Valida
+    // Validar contraseñas iguales
     if (pass !== repass) {
-      checkpass.innerText = "Las contraseñas no coinciden";
-      return;
+        document.getElementById("checkpass").innerText = "Las contraseñas no coinciden";
+        return;
     } else {
-      checkpass.innerText = "";
+        document.getElementById("checkpass").innerText = "";
     }
 
-    // Obtener usuarios almacenados
+    // Traer usuarios
     let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-    // Verificar duplicados
-    if (usuarios.find(u => u.rut === rut || u.mail === mail)) {
-      alert("Ya existe un usuario con este RUT o correo");
-      return;
+    // Validar que el correo no esté registrado
+    if (usuarios.some(u => u.mail === mail)) {
+        alert("Este correo ya está registrado");
+        return;
     }
 
-    // Guardar usuario
-    const nuevoUsuario = { rut, nombre, pass, mail };
-    usuarios.push(nuevoUsuario);
+    // Guardar nuevo usuario
+    usuarios.push({ rut, nom, pass, mail });
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-    // Guardar sesión activa
-    localStorage.setItem("usuarioActivo", JSON.stringify(nuevoUsuario));
+    // Autologin -> guardar sesión activa
+    localStorage.setItem("usuarioActivo", nom);
 
-    alert("Registro exitoso, bienvenido " + nombre + " ☕");
-
-    // Redirige a la pagina anterior del registro de sesion
-    const paginaAnterior = document.referrer || "index.html";
-    window.location.href = paginaAnterior;
-  });
+    alert(`Usuario registrado con éxito. Bienvenido ${nom}`);
+    
+    // Volver a la página anterior o a index.html si no hay historial
+    if (document.referrer && document.referrer.includes(window.location.hostname)) {
+        window.history.back();
+    } else {
+        window.location.href = "index.html";
+    }
 });

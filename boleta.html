@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boleta - Objetivo Café</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/colores.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-sm navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Objetivo Café</a>
+    </div>
+  </nav>
+
+  <!-- Encabezado -->
+  <div class="p-4 bg-success text-center text-white shadow">
+    <h1 class="display-5">¡Gracias por tu compra!</h1>
+    <p>Detalle de tu boleta</p>
+  </div>
+
+  <!-- Contenido -->
+  <div class="container mt-5">
+    <div class="table-responsive shadow rounded">
+      <table class="table table-bordered text-center align-middle">
+        <thead style="background-color: #261914; color: #F2F2F2;">
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody id="tablaBoleta" style="background-color: #F2F2F2;">
+          <!-- Productos cargados dinámicamente -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Total -->
+    <div class="d-flex justify-content-between align-items-center mt-4">
+      <h3 id="total" style="color:#593831;">Total: $0</h3>
+      <button class="btn btn-primary" onclick="window.print()">Imprimir Boleta</button>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="index.html" class="btn btn-outline-secondary">Volver a la tienda</a>
+    </div>
+  </div>
+
+  <script>
+    // Cargar datos del carrito que se guardaron en localStorage antes de vaciarlo
+    let compra = JSON.parse(localStorage.getItem("ultimaCompra")) || [];
+
+    function calcularTotal() {
+      return compra.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
+    }
+
+    function mostrarBoleta() {
+      const tabla = document.getElementById('tablaBoleta');
+      tabla.innerHTML = '';
+
+      if (compra.length === 0) {
+        tabla.innerHTML = `<tr><td colspan="4">No hay productos en la boleta</td></tr>`;
+      } else {
+        compra.forEach(item => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${item.nombre}</td>
+            <td>${item.cantidad}</td>
+            <td>$${item.precio}</td>
+            <td>$${item.precio * item.cantidad}</td>
+          `;
+          tabla.appendChild(row);
+        });
+      }
+
+      document.getElementById('total').innerText = `Total: $${calcularTotal()}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', mostrarBoleta);
+  </script>
+</body>
+
+</html>

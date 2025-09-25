@@ -1,51 +1,68 @@
+// Leer carrito desde localStorage o crear vacío
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-// Mostrar carrito
-function mostrarCarrito() {
-  const tabla = document.getElementById("tablaCarrito");
-  const totalElemento = document.getElementById("total");
-  tabla.innerHTML = "";
-
-  let total = 0;
-
-  carrito.forEach((item, index) => {
-    const subtotal = item.precio * item.cantidad;
-    total += subtotal;
-
-    let fila = `
-      <tr>
-        <td>${item.nombre}</td>
-        <td>${item.molienda ? item.molienda : "-"}</td>
-        <td>${item.cantidad}</td>
-        <td>$${subtotal}</td>
-      </tr>
-    `;
-    tabla.innerHTML += fila;
-  });
-
-  totalElemento.innerText = "Total: $" + total;
+// Función para agregar productos
+function agregarAlCarrito(nombre, opcion, cantidad, precio) {
+    const producto = { nombre, opcion, cantidad, precio };
+    carrito.push(producto);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    alert(`Producto agregado: ${nombre} (${opcion}) x${cantidad}`);
 }
 
-// Vaciar carrito
-function vaciarCarrito() {
-  if (confirm("¿Seguro que deseas vaciar el carrito?")) {
-    carrito = [];
+// Mostrar carrito en carrito.html
+function mostrarCarrito() {
+    const tabla = document.getElementById("tablaCarrito");
+    if (!tabla) return;
+
+    tabla.innerHTML = "";
+
+    if (carrito.length === 0) {
+        tabla.innerHTML = `<tr><td colspan="6">Tu carrito está vacío</td></tr>`;
+    } else {
+        carrito.forEach((item, index) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${item.nombre}</td>
+                <td>${item.opcion || '-'}</td>
+                <td>${item.cantidad}</td>
+                <td>$${item.precio}</td>
+                <td>$${item.precio * item.cantidad}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm" onclick="eliminarDelCarrito(${index})">Eliminar</button>
+                </td>
+            `;
+            tabla.appendChild(row);
+        });
+    }
+
+    const totalElem = document.getElementById("total");
+    if(totalElem) totalElem.innerText = `Total: $${calcularTotal()}`;
+}
+
+// Calcular total
+function calcularTotal() {
+    return carrito.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
+}
+
+// Eliminar producto
+function eliminarDelCarrito(index) {
+    carrito.splice(index, 1);
     localStorage.setItem("carrito", JSON.stringify(carrito));
     mostrarCarrito();
-  }
 }
 
 // Finalizar compra
 function finalizarCompra() {
-  if (carrito.length === 0) {
-    alert("El carrito está vacío");
-    return;
-  }
-  alert("¡Gracias por tu compra! ☕");
-  carrito = [];
-  localStorage.setItem("carrito", JSON.stringify(carrito));
-  mostrarCarrito();
+    if(carrito.length === 0) {
+        alert("Tu carrito está vacío");
+        return;
+    }
+    localStorage.setItem("ultimaCompra", JSON.stringify(carrito));
+    carrito = [];
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    alert("Compra finalizada!");
+    window.location.href = "index.html";
 }
 
-// Cargar al inicio
+// Mostrar carrito al cargar
 document.addEventListener("DOMContentLoaded", mostrarCarrito);

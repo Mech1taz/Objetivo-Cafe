@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar Sesión - Objetivo Café</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/colores.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Objetivo Café</a>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+        <div class="shadow rounded p-4 bg-white">
+          <h1 class="text-center mb-4">Iniciar Sesión</h1>
+
+          <form id="formLogin">
+            <div class="mb-3">
+              <label for="mail" class="form-label">E-mail:</label>
+              <input type="email" class="form-control" id="mail" required>
+            </div>
+            <div class="mb-3">
+              <label for="pass" class="form-label">Contraseña:</label>
+              <input type="password" class="form-control" id="pass" required>
+            </div>
+            <div class="text-center mt-3">
+              <button type="submit" class="btn btn-primary px-4">Ingresar</button>
+              <a href="registro.html" class="btn btn-link">¿No tienes cuenta? Regístrate</a>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-sm-3"></div>
+    </div>
+  </div>
+
+  <script src="js/login.js"></script>
+</body>
+</html>
