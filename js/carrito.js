@@ -57,12 +57,18 @@ function finalizarCompra() {
         alert("Tu carrito está vacío");
         return;
     }
+
+    // Guardar la compra en localStorage
     localStorage.setItem("ultimaCompra", JSON.stringify(carrito));
+
+    // Vaciar carrito
     carrito = [];
     localStorage.setItem("carrito", JSON.stringify(carrito));
-    alert("Compra finalizada!");
-    window.location.href = "index.html";
+
+    // Redirigir a boleta.html
+    window.location.href = "boleta.html";
 }
+
 
 // Mostrar carrito al cargar
 document.addEventListener("DOMContentLoaded", mostrarCarrito);
