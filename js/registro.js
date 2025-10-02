@@ -1,42 +1,32 @@
 document.getElementById("formRegistro").addEventListener("submit", (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const rut = document.getElementById("rut").value;
-    const nom = document.getElementById("nom").value;
-    const pass = document.getElementById("pass").value;
-    const repass = document.getElementById("repass").value;
-    const mail = document.getElementById("mail").value;
+  const rut = document.getElementById("rut").value;
+  const nombre = document.getElementById("nom").value;
+  const pass = document.getElementById("pass").value;
+  const repass = document.getElementById("repass").value;
+  const mail = document.getElementById("mail").value;
 
-    // Validar contraseñas iguales
-    if (pass !== repass) {
-        document.getElementById("checkpass").innerText = "Las contraseñas no coinciden";
-        return;
-    } else {
-        document.getElementById("checkpass").innerText = "";
-    }
+  if (pass !== repass) {
+    document.getElementById("checkpass").innerText = "Las contraseñas no coinciden.";
+    return;
+  }
 
-    // Traer usuarios
-    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+  // Crear objeto de usuario
+  const usuario = { rut, nombre, mail, pass };
 
-    // Validar que el correo no esté registrado
-    if (usuarios.some(u => u.mail === mail)) {
-        alert("Este correo ya está registrado");
-        return;
-    }
+  // Guardar en localStorage (lista de usuarios)
+  let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+  
+  // Evitar duplicados por correo
+  if (usuarios.find(u => u.mail === mail)) {
+    alert("El correo ya está registrado.");
+    return;
+  }
 
-    // Guardar nuevo usuario
-    usuarios.push({ rut, nom, pass, mail });
-    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  usuarios.push(usuario);
+  localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-    // Autologin -> guardar sesión activa
-    localStorage.setItem("usuarioActivo", nom);
-
-    alert(`Usuario registrado con éxito. Bienvenido ${nom}`);
-    
-    // Volver a la página anterior o a index.html si no hay historial
-    if (document.referrer && document.referrer.includes(window.location.hostname)) {
-        window.history.back();
-    } else {
-        window.location.href = "index.html";
-    }
+  alert("Registro exitoso. Ahora puedes iniciar sesión.");
+  window.location.href = "login.html";
 });

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil de Usuario - Objetivo Café</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/colores.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Objetivo Café</a>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown d-none" id="userDropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Usuario
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#">Ver perfil</a></li>
+              <li><a class="dropdown-item" href="#" id="logoutBtn">Cerrar sesión</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" id="loginLink" href="login.html">Iniciar Sesión</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <h1 class="mb-4">Perfil de Usuario</h1>
+    <div class="card shadow p-4">
+      <p><strong>Nombre:</strong> <span id="nombreUsuario"></span></p>
+      <p><strong>Rut:</strong> <span id="rutUsuario"></span></p>
+      <p><strong>Correo:</strong> <span id="mailUsuario"></span></p>
+    </div>
+  </div>
+
+  <script>
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+    if (!usuario) {
+      alert("Debes iniciar sesión primero.");
+      window.location.href = "login.html";
+    } else {
+      document.getElementById("nombreUsuario").textContent = usuario.nombre;
+      document.getElementById("rutUsuario").textContent = usuario.rut;
+      document.getElementById("mailUsuario").textContent = usuario.mail;
+
+      // Navbar
+      const loginLink = document.getElementById("loginLink");
+      const userDropdown = document.getElementById("userDropdown");
+      const navbarUser = document.getElementById("navbarUser");
+
+      loginLink.classList.add("d-none");
+      userDropdown.classList.remove("d-none");
+      navbarUser.textContent = usuario.nombre;
+
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("usuario");
+        window.location.href = "index.html";
+      });
+    }
+  </script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
