@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Productos</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="..css/colores.css" rel="stylesheet">
+  <script src="..js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Objetivo Café - Admin</a>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a href="admin_productos.html" class="nav-link active">Productos</a></li>
+        <li class="nav-item"><a href="admin_usuarios.html" class="nav-link">Usuarios</a></li>
+        <li class="nav-item"><a href="admin_ventas.html" class="nav-link">Ventas</a></li>
+        <li class="nav-item"><a href="admin_resumen.html" class="nav-link">Resumen</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Gestión de Productos</h2>
+
+    <form id="formProducto" class="shadow p-4 bg-white rounded">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <label class="form-label">Nombre</label>
+          <input type="text" id="nombre" class="form-control" required>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Precio</label>
+          <input type="number" id="precio" class="form-control" required>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Categoría</label>
+          <input type="text" id="categoria" class="form-control" required>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <button class="btn btn-primary px-4" type="submit">Agregar Producto</button>
+      </div>
+    </form>
+
+    <table class="table table-striped mt-5">
+      <thead class="table-dark">
+        <tr>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Categoría</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tablaProductos"></tbody>
+    </table>
+  </div>
+
+  <script>
+    let productos = JSON.parse(localStorage.getItem("productos")) || [];
+    const form = document.getElementById("formProducto");
+    const tabla = document.getElementById("tablaProductos");
+
+    function mostrarProductos() {
+      tabla.innerHTML = "";
+      productos.forEach((p, i) => {
+        tabla.innerHTML += `
+          <tr>
+            <td>${p.nombre}</td>
+            <td>$${p.precio}</td>
+            <td>${p.categoria}</td>
+            <td>
+              <button class="btn btn-warning btn-sm" onclick="editar(${i})">Editar</button>
+              <button class="btn btn-danger btn-sm" onclick="eliminar(${i})">Eliminar</button>
+            </td>
+          </tr>`;
+      });
+    }
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const nuevo = {
+        nombre: nombre.value,
+        precio: parseFloat(precio.value),
+        categoria: categoria.value
+      };
+      productos.push(nuevo);
+      localStorage.setItem("productos", JSON.stringify(productos));
+      form.reset();
+      mostrarProductos();
+    });
+
+    function eliminar(i) {
+      productos.splice(i, 1);
+      localStorage.setItem("productos", JSON.stringify(productos));
+      mostrarProductos();
+    }
+
+    function editar(i) {
+      const p = productos[i];
+      nombre.value = p.nombre;
+      precio.value = p.precio;
+      categoria.value = p.categoria;
+      productos.splice(i, 1);
+      localStorage.setItem("productos", JSON.stringify(productos));
+      mostrarProductos();
+    }
+
+    document.addEventListener("DOMContentLoaded", mostrarProductos);
+  </script>
+</body>
+</html>

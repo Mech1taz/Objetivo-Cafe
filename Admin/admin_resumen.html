@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Resumen</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/colores.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Objetivo Café - Admin</a>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a href="admin_productos.html" class="nav-link">Productos</a></li>
+        <li class="nav-item"><a href="admin_usuarios.html" class="nav-link">Usuarios</a></li>
+        <li class="nav-item"><a href="admin_ventas.html" class="nav-link">Ventas</a></li>
+        <li class="nav-item"><a href="admin_resumen.html" class="nav-link active">Resumen</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Resumen General</h2>
+
+    <div class="row text-center">
+      <div class="col-md-4">
+        <div class="shadow p-4 bg-white rounded">
+          <h4>Usuarios</h4>
+          <p id="totalUsuarios" class="fs-4 fw-bold"></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="shadow p-4 bg-white rounded">
+          <h4>Productos</h4>
+          <p id="totalProductos" class="fs-4 fw-bold"></p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="shadow p-4 bg-white rounded">
+          <h4>Ventas Totales</h4>
+          <p id="totalVentas" class="fs-4 fw-bold"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    const productos = JSON.parse(localStorage.getItem("productos")) || [];
+    const ventas = JSON.parse(localStorage.getItem("ultimaCompra")) || [];
+
+    document.getElementById("totalUsuarios").innerText = usuarios.length;
+    document.getElementById("totalProductos").innerText = productos.length;
+
+    const total = ventas.reduce((sum, v) => sum + (v.precio * v.cantidad), 0);
+    document.getElementById("totalVentas").innerText = "$" + total.toLocaleString("es-CL");
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Usuarios</title>
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/colores.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">Objetivo Café - Admin</a>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a href="admin_productos.html" class="nav-link">Productos</a></li>
+        <li class="nav-item"><a href="admin_usuarios.html" class="nav-link active">Usuarios</a></li>
+        <li class="nav-item"><a href="admin_ventas.html" class="nav-link">Ventas</a></li>
+        <li class="nav-item"><a href="admin_resumen.html" class="nav-link">Resumen</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Usuarios Registrados</h2>
+    <table class="table table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>RUT</th>
+          <th>Nombre</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody id="tablaUsuarios"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    const tabla = document.getElementById("tablaUsuarios");
+
+    function mostrarUsuarios() {
+      if (usuarios.length === 0) {
+        tabla.innerHTML = `<tr><td colspan="3">No hay usuarios registrados</td></tr>`;
+      } else {
+        tabla.innerHTML = usuarios.map(u => `
+          <tr>
+            <td>${u.rut}</td>
+            <td>${u.nombre}</td>
+            <td>${u.mail}</td>
+          </tr>`).join('');
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", mostrarUsuarios);
+  </script>
+</body>
+</html>
