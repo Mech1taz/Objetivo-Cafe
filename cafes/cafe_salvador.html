@@ -1,25 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Café Salvador Honey - Objetivo Café</title>
   <link href="../css/bootstrap.min.css" rel="stylesheet">
   <link href="../css/colores.css" rel="stylesheet">
-  <style>
-    .cafe-img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-    }
-
-    .cafe-card {
-      padding: 20px;
-    }
-  </style>
 </head>
-
 <body>
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container-fluid">
@@ -39,18 +26,16 @@
   </nav>
 
   <div class="container mt-5">
-    <div class="card shadow cafe-card">
+    <div class="card shadow p-3">
       <div class="row g-4">
-        <!-- Imagen -->
         <div class="col-md-5">
-          <img src="../img/Salvador_honey.png" alt="Café Salvador Honey" class="cafe-img">
+          <img src="../img/Salvador_honey.png" alt="Café Salvador Honey" class="img-fluid rounded">
         </div>
-        <!-- Información -->
         <div class="col-md-7">
-          <h2>Café Salvador Honey 250 gr</h2>
+          <h2 id="nombreProducto">Café Salvador Honey 250 g</h2>
           <p>Proveniente de fincas salvadoreñas que utilizan el método honey. El grano se seca con una capa de mucílago (la "miel"), lo que reduce la acidez y aumenta la dulzura, el cuerpo y sabores afrutados.</p>
           <p><strong>Notas:</strong> Panela, uva roja, almibarado, con un cuerpo meloso.</p>
-          <p><strong>Precio:</strong> $12.990</p>
+          <p><strong>Precio:</strong> <span id="precioProducto"></span></p>
 
           <label for="molienda">Seleccione molienda:</label>
           <select id="molienda" class="form-control mb-3">
@@ -63,16 +48,27 @@
           <label for="cantidad">Cantidad:</label>
           <input type="number" id="cantidad" class="form-control mb-3" min="1" value="1">
 
-          <button class="btn btn-primary"
-            onclick="agregarAlCarrito('Café Salvador Honey 250 gr', document.getElementById('molienda').value, parseInt(document.getElementById('cantidad').value), 12990)">
-            Añadir al carrito
-          </button>
+          <button id="btnAgregar" class="btn btn-primary">Añadir al carrito</button>
         </div>
       </div>
     </div>
   </div>
 
+  <script src="../js/productos.js"></script>
   <script src="../js/carrito.js"></script>
-</body>
+  <script>
+    // ID 4 = Café Salvador Honey (según productos.js)
+    const producto = obtenerProductoPorId(4);
 
+    // Mostrar el precio actualizado
+    document.getElementById('precioProducto').innerText = `$${producto.precio.toLocaleString()}`;
+
+    // Agregar al carrito
+    document.getElementById('btnAgregar').addEventListener('click', () => {
+      const molienda = document.getElementById('molienda').value;
+      const cantidad = parseInt(document.getElementById('cantidad').value);
+      agregarAlCarrito(producto.nombre, molienda, cantidad, producto.precio);
+    });
+  </script>
+</body>
 </html>

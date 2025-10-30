@@ -1,27 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Café México - Objetivo Café</title>
   <link href="../css/bootstrap.min.css" rel="stylesheet">
   <link href="../css/colores.css" rel="stylesheet">
-  <style>
-    .cafe-img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-    }
-
-    .cafe-card {
-      padding: 20px;
-    }
-  </style>
 </head>
-
 <body>
-  <!-- Navbar -->
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.html">Objetivo Café</a>
@@ -39,20 +25,17 @@
     </div>
   </nav>
 
-  <!-- Contenido -->
   <div class="container mt-5">
-    <div class="card shadow cafe-card">
+    <div class="card shadow p-3">
       <div class="row g-4">
-        <!-- Imagen -->
         <div class="col-md-5">
-          <img src="../img/Cafe_México.png" alt="Café México 250 gr" class="cafe-img">
+          <img src="../img/Cafe_México.png" alt="Café México 250 gr" class="img-fluid rounded">
         </div>
-        <!-- Información -->
         <div class="col-md-7">
-          <h2>Café México 250 gr</h2>
+          <h2 id="nombreProducto">Café México 250 g</h2>
           <p>Proveniente de la región montañosa de Chiapas, cerca de la frontera con Guatemala. Este café es orgánico, ya que los pequeños productores utilizan métodos tradicionales y de bajo impacto. Su perfil es suave y agradable.</p>
           <p><strong>Notas:</strong> Nueces (avellana, almendra), leche condensada, cacao suave y un toque especiado.</p>
-          <p><strong>Precio:</strong> $12.990</p>
+          <p><strong>Precio:</strong> <span id="precioProducto"></span></p>
 
           <label for="molienda">Seleccione molienda:</label>
           <select id="molienda" class="form-control mb-3">
@@ -65,16 +48,27 @@
           <label for="cantidad">Cantidad:</label>
           <input type="number" id="cantidad" class="form-control mb-3" min="1" value="1">
 
-          <button class="btn btn-primary"
-            onclick="agregarAlCarrito('Café México 250 gr', document.getElementById('molienda').value, parseInt(document.getElementById('cantidad').value), 12990)">
-            Añadir al carrito
-          </button>
+          <button id="btnAgregar" class="btn btn-primary">Añadir al carrito</button>
         </div>
       </div>
     </div>
   </div>
 
+  <script src="../js/productos.js"></script>
   <script src="../js/carrito.js"></script>
-</body>
+  <script>
+    // ID 5 = Café México (según productos.js)
+    const producto = obtenerProductoPorId(5);
 
+    // Mostrar el precio actualizado
+    document.getElementById('precioProducto').innerText = `$${producto.precio.toLocaleString()}`;
+
+    // Agregar al carrito
+    document.getElementById('btnAgregar').addEventListener('click', () => {
+      const molienda = document.getElementById('molienda').value;
+      const cantidad = parseInt(document.getElementById('cantidad').value);
+      agregarAlCarrito(producto.nombre, molienda, cantidad, producto.precio);
+    });
+  </script>
+</body>
 </html>
