@@ -7,9 +7,8 @@
   <link href="../css/bootstrap.min.css" rel="stylesheet">
   <link href="../css/colores.css" rel="stylesheet">
 </head>
-<body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+<body data-producto-id="2"> 
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.html">Objetivo Café</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
@@ -26,8 +25,7 @@
     </div>
   </nav>
 
-  <!-- Contenido -->
-  <div class="container mt-5">
+    <div class="container mt-5">
     <div class="card shadow p-3">
       <div class="row g-4">
         <div class="col-md-5">
@@ -56,19 +54,9 @@
     </div>
   </div>
 
-  <script src="../js/productos.js"></script>
+    <script src="../js/productos.js"></script>
+  <script src="../js/productos_funciones.js"></script> 
   <script src="../js/carrito.js"></script>
-  <script>
-    // Obtenemos el producto (ID 3 = Café Etiopía)
-    const producto = obtenerProductoPorId(3);
-
-    document.getElementById('precioProducto').innerText = `$${producto.precio.toLocaleString()}`;
-
-    document.getElementById('btnAgregar').addEventListener('click', () => {
-      const molienda = document.getElementById('molienda').value;
-      const cantidad = parseInt(document.getElementById('cantidad').value);
-      agregarAlCarrito(producto.nombre, molienda, cantidad, producto.precio);
-    });
-  </script>
+    <script src="../js/detalle_cafe.js"></script>
 </body>
 </html>

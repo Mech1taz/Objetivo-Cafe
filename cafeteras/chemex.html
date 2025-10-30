@@ -20,8 +20,7 @@
     </style>
 </head>
 
-<body>
-    <!-- Navbar -->
+<body data-producto-id="105"> 
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.html">Objetivo Café</a>
@@ -39,27 +38,24 @@
         </div>
     </nav>
 
-    <!-- Contenido -->
     <div class="container mt-5">
         <div class="card shadow cafe-card">
             <div class="row g-4">
-                <!-- Imagen -->
                 <div class="col-md-5">
                     <img src="../img/chemex.png" alt="Chemex" class="cafe-img">
                 </div>
-                <!-- Info -->
                 <div class="col-md-7">
                     <h2>Chemex</h2>
                     <p>Fabricada en vidrio con un elegante diseño de reloj de arena y un collar de madera. Utiliza
                         filtros de papel extra gruesos que retienen los aceites y sedimentos, logrando una taza de una
                         claridad excepcional.</p>
-                    <p><strong>Precio:</strong> $14.990</p>
+                    
+                    <p><strong>Precio:</strong> <span id="precioProducto"></span></p> 
 
                     <label for="cantidad">Cantidad:</label>
                     <input type="number" id="cantidad" class="form-control mb-3" min="1" value="1">
 
-                    <button class="btn btn-primary"
-                        onclick="agregarAlCarrito('Moka Italiana 350ml', '-', parseInt(document.getElementById('cantidad').value), 14990)">
+                    <button id="btnAgregar" class="btn btn-primary">
                         Añadir al carrito
                     </button>
                 </div>
@@ -67,8 +63,10 @@
         </div>
     </div>
 
-    <!-- JS -->
+    <script src="../js/productos.js"></script>
+    <script src="../js/productos_funciones.js"></script> 
     <script src="../js/carrito.js"></script>
+    <script src="../js/detalle_equipo.js"></script> 
 </body>
 
 </html>

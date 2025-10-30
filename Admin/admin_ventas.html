@@ -67,19 +67,25 @@
         return;
       }
 
-      ventasHistorico.forEach((venta, index) => {
+      // Recorrer el historial de ventas
+      // Usamos el índice inverso (ventas.length - 1 - index) para mostrar las ventas más recientes primero
+      ventasHistorico.slice().reverse().forEach((venta, index) => {
         const fila = document.createElement('tr');
         
         // Calcular el total de la venta actual
         const totalVenta = venta.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
         
+        // Generar un ID simple y la fecha actual (se podría mejorar si la fecha real se guardara en carrito.js)
+        const idVenta = ventasHistorico.length - index;
+        const fechaSimulada = new Date().toLocaleDateString('es-CL');
+
         fila.innerHTML = `
-          <td>#${1000 + index}</td>
-          <td>$${totalVenta.toLocaleString('es-CL')}</td>
-          <td>${new Date().toLocaleDateString('es-CL')}</td>
-          <td>${venta.length} ítems</td>
+          <td>#${1000 + idVenta}</td>
+          <td class="fw-bold">$${totalVenta.toLocaleString('es-CL')}</td>
+          <td>${fechaSimulada}</td>
+          <td><span class="badge bg-secondary">${venta.length}</span></td>
           <td>
-            <button class="btn btn-sm btn-info me-2 text-white" onclick="alert('Detalle de Venta #${1000 + index}: ${venta.map(i => i.nombre).join(', ')}')">
+            <button class="btn btn-sm btn-info me-2 text-white" onclick="alert('Detalle Venta #${1000 + idVenta}: ${venta.map(i => i.nombre).join(', ')}')">
               <i class="fas fa-search"></i> Ver
             </button>
           </td>

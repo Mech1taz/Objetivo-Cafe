@@ -20,8 +20,7 @@
     </style>
 </head>
 
-<body>
-    <!-- Navbar -->
+<body data-producto-id="101"> 
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.html">Objetivo Café</a>
@@ -39,25 +38,22 @@
         </div>
     </nav>
 
-    <!-- Contenido -->
     <div class="container mt-5">
         <div class="card shadow cafe-card">
             <div class="row g-4">
-                <!-- Imagen -->
                 <div class="col-md-5">
-                    <img src="../img/cafetera-francesa-lugano.jpg.png" alt="Prensa francesa 600" class="cafe-img">
+                    <img src="../img/cafetera_francesa.png" alt="Prensa francesa 600" class="cafe-img"> 
                 </div>
-                <!-- Info -->
                 <div class="col-md-7">
                     <h2>Prensa francesa 600 ml</h2>
-                    <p>  La versión con estructura de bambú añade un toque natural y elegante. El café se infusiona en agua caliente y luego se separa con un filtro de malla metálica que permite el paso de aceites y partículas finas.</p>
-                    <p><strong>Precio:</strong> $13.990</p>
+                    <p>La versión con estructura de bambú añade un toque natural y elegante. El café se infusiona en agua caliente y luego se separa con un filtro de malla metálica que permite el paso de aceites y partículas finas.</p>
+                    
+                    <p><strong>Precio:</strong> <span id="precioProducto"></span></p> 
 
                     <label for="cantidad">Cantidad:</label>
                     <input type="number" id="cantidad" class="form-control mb-3" min="1" value="1">
 
-                    <button class="btn btn-primary"
-                        onclick="agregarAlCarrito('Aeropress Go', '-', parseInt(document.getElementById('cantidad').value), 74990)">
+                    <button id="btnAgregar" class="btn btn-primary">
                         Añadir al carrito
                     </button>
                 </div>
@@ -65,8 +61,10 @@
         </div>
     </div>
 
-    <!-- JS -->
+    <script src="../js/productos.js"></script>
+    <script src="../js/productos_funciones.js"></script> 
     <script src="../js/carrito.js"></script>
+    <script src="../js/detalle_equipo.js"></script> 
 </body>
 
 </html>

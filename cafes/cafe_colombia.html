@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Café Descafeinado - Objetivo Café</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Café Colombia - Objetivo Café</title>
   <link href="../css/bootstrap.min.css" rel="stylesheet">
   <link href="../css/colores.css" rel="stylesheet">
 </head>
-<body>
+<body data-producto-id="1"> 
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.html">Objetivo Café</a>
@@ -29,13 +30,15 @@
     <div class="card shadow p-3">
       <div class="row g-4">
         <div class="col-md-5">
-          <img src="../img/Café_descafeinado.png" alt="Café Descafeinado" class="img-fluid rounded">
+          <img src="../img/cafe_colombia.png" alt="Café Colombia" class="img-fluid rounded">
         </div>
         <div class="col-md-7">
-          <h2 id="nombreProducto">Café Descafeinado 250 g</h2>
-          <p>Aroma a chocolate y nuez con toques de caramelo achocolatado y una fragancia cítrica a naranja.</p>
-          <p>Notas: chocolate, caramelo, nuez tostada. Cuerpo medio y baja acidez.</p>
-          <p><strong>Precio:</strong> <span id="precioProducto"></span></p>
+                    <h2>Café Colombia 250 g</h2> 
+          <p>Cultivado en las famosas zonas cafeteras de los Andes colombianos. Tamaño grande y uniforme del grano, garantizando una torrefacción pareja. Es un café confiable y lleno de
+            sabor.</p>
+          <p>Notas: cacao, naranja caramelizada, nueces.</p>
+          
+                    <p><strong>Precio:</strong> <span id="precioProducto"></span></p> 
 
           <label for="molienda">Seleccione molienda:</label>
           <select id="molienda" class="form-control mb-3">
@@ -48,25 +51,17 @@
           <label for="cantidad">Cantidad:</label>
           <input type="number" id="cantidad" class="form-control mb-3" min="1" value="1">
 
-          <button id="btnAgregar" class="btn btn-primary">Añadir al carrito</button>
+                    <button id="btnAgregar" class="btn btn-primary">
+            Añadir al carrito
+          </button>
         </div>
       </div>
     </div>
   </div>
 
-  <script src="../js/productos.js"></script>
+    <script src="../js/productos.js"></script>
+  <script src="../js/productos_funciones.js"></script> 
   <script src="../js/carrito.js"></script>
-  <script>
-    // Obtenemos el producto por su ID (debes tenerlo en productos.js)
-    const producto = obtenerProductoPorId(2); // ID 2 = Café Descafeinado
-
-    document.getElementById('precioProducto').innerText = `$${producto.precio.toLocaleString()}`;
-
-    document.getElementById('btnAgregar').addEventListener('click', () => {
-      const molienda = document.getElementById('molienda').value;
-      const cantidad = parseInt(document.getElementById('cantidad').value);
-      agregarAlCarrito(producto.nombre, molienda, cantidad, producto.precio);
-    });
-  </script>
+    <script src="../js/detalle_cafe.js"></script> 
 </body>
 </html>

@@ -20,9 +20,8 @@
     </style>
 </head>
 
-<body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+<body data-producto-id="106"> 
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.html">Objetivo Café</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
@@ -39,34 +38,33 @@
         </div>
     </nav>
 
-    <!-- Contenido -->
-    <div class="container mt-5">
+        <div class="container mt-5">
         <div class="card shadow cafe-card">
             <div class="row g-4">
-                <!-- Imagen -->
-                <div class="col-md-5">
+                                <div class="col-md-5">
                     <img src="../img/v60.png" alt="V60" class="cafe-img">
                 </div>
-                <!-- Info -->
-                <div class="col-md-7">
+                                <div class="col-md-7">
                     <h2>V60</h2>
                     <p>Un dripper o vertedor cónico (generalmente de cerámica, vidrio o plástico) que usa filtros en forma de cono. Su diseño permite controlar la velocidad y turbulencia del agua, dando al usuario el poder de manipular la extracción.</p>
-                    <p><strong>Precio:</strong> $29.990</p>
+                    
+                                        <p><strong>Precio:</strong> <span id="precioProducto"></span></p> 
 
                     <label for="cantidad">Cantidad:</label>
                     <input type="number" id="cantidad" class="form-control mb-3" min="1" value="1">
 
-                    <button class="btn btn-primary"
-                        onclick="agregarAlCarrito('Aeropress Go', '-', parseInt(document.getElementById('cantidad').value), 74990)">
+                                        <button id="btnAgregar" class="btn btn-primary">
                         Añadir al carrito
                     </button>
                 </div>
             </div>
         </div>
-    </div>
+      </div>
 
-    <!-- JS -->
+    <script src="../js/productos.js"></script>
+    <script src="../js/productos_funciones.js"></script> 
     <script src="../js/carrito.js"></script>
+    <script src="../js/detalle_equipo.js"></script> 
 </body>
 
 </html>

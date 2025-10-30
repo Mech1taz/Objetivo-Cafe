@@ -7,7 +7,7 @@
   <link href="../css/bootstrap.min.css" rel="stylesheet">
   <link href="../css/colores.css" rel="stylesheet">
 </head>
-<body>
+<body data-producto-id="5"> 
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.html">Objetivo Café</a>
@@ -51,24 +51,12 @@
           <button id="btnAgregar" class="btn btn-primary">Añadir al carrito</button>
         </div>
       </div>
-    </div>
+      </div>
   </div>
 
-  <script src="../js/productos.js"></script>
+    <script src="../js/productos.js"></script>
+  <script src="../js/productos_funciones.js"></script> 
   <script src="../js/carrito.js"></script>
-  <script>
-    // ID 5 = Café México (según productos.js)
-    const producto = obtenerProductoPorId(5);
-
-    // Mostrar el precio actualizado
-    document.getElementById('precioProducto').innerText = `$${producto.precio.toLocaleString()}`;
-
-    // Agregar al carrito
-    document.getElementById('btnAgregar').addEventListener('click', () => {
-      const molienda = document.getElementById('molienda').value;
-      const cantidad = parseInt(document.getElementById('cantidad').value);
-      agregarAlCarrito(producto.nombre, molienda, cantidad, producto.precio);
-    });
-  </script>
+    <script src="../js/detalle_cafe.js"></script>
 </body>
 </html>
