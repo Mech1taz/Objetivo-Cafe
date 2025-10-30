@@ -3,58 +3,103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - Resumen</title>
+  <title>Resumen - Objetivo Café Admin</title>
+
+    <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap"
+    rel="stylesheet">
   <link href="../css/bootstrap.min.css" rel="stylesheet">
   <link href="../css/colores.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Estilo para resaltar las tarjetas de resumen */
+    .resumen-card {
+      background-color: #ffffff;
+      border: 1px solid #f0f0f0;
+      transition: transform 0.3s ease;
+    }
+    .resumen-card:hover {
+      transform: translateY(-5px);
+    }
+  </style>
 </head>
+
 <body>
-  <nav class="navbar navbar-expand-sm navbar-dark">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">Objetivo Café - Admin</a>
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a href="admin_productos.html" class="nav-link">Productos</a></li>
-        <li class="nav-item"><a href="admin_usuarios.html" class="nav-link">Usuarios</a></li>
-        <li class="nav-item"><a href="admin_ventas.html" class="nav-link">Ventas</a></li>
-        <li class="nav-item"><a href="admin_resumen.html" class="nav-link active">Resumen</a></li>
-      </ul>
+      <a class="navbar-brand" href="../index.html">Objetivo Café - Admin</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a href="admin_resumen.html" class="nav-link active"><i class="fas fa-chart-line"></i> Resumen</a></li>
+          <li class="nav-item"><a href="admin_productos.html" class="nav-link"><i class="fas fa-box-open"></i> Productos</a></li>
+          <li class="nav-item"><a href="admin_usuarios.html" class="nav-link"><i class="fas fa-users"></i> Usuarios</a></li>
+          <li class="nav-item"><a href="admin_ventas.html" class="nav-link"><i class="fas fa-cash-register"></i> Ventas</a></li>
+          <li class="nav-item"><a href="../index.html" class="btn btn-sm btn-danger ms-2">Volver</a></li>
+        </ul>
+      </div>
     </div>
   </nav>
 
-  <div class="container mt-5">
-    <h2 class="text-center mb-4">Resumen General</h2>
+    <div class="container mt-5">
+    <h2 class="text-center mb-5">Resumen General de la Tienda 📊</h2>
 
     <div class="row text-center">
-      <div class="col-md-4">
-        <div class="shadow p-4 bg-white rounded">
-          <h4>Usuarios</h4>
-          <p id="totalUsuarios" class="fs-4 fw-bold"></p>
+            <div class="col-md-4 mb-4">
+        <div class="shadow p-4 rounded resumen-card border border-info">
+          <h4>👥 Total Usuarios</h4>
+          <p id="totalUsuarios" class="fs-2 fw-bold text-info">0</p>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="shadow p-4 bg-white rounded">
-          <h4>Productos</h4>
-          <p id="totalProductos" class="fs-4 fw-bold"></p>
+            <div class="col-md-4 mb-4">
+        <div class="shadow p-4 rounded resumen-card border border-warning">
+          <h4>📦 Total Productos</h4>
+          <p id="totalProductos" class="fs-2 fw-bold text-warning">0</p>
         </div>
+        <span class="badge bg-secondary">Incluye ítems Base y Añadidos</span>
       </div>
-      <div class="col-md-4">
-        <div class="shadow p-4 bg-white rounded">
-          <h4>Ventas Totales</h4>
-          <p id="totalVentas" class="fs-4 fw-bold"></p>
+            <div class="col-md-4 mb-4">
+        <div class="shadow p-4 rounded resumen-card border border-success">
+          <h4>💰 Ventas Estimadas</h4>
+          <p id="totalVentas" class="fs-2 fw-bold text-success">$0</p>
         </div>
       </div>
     </div>
   </div>
+  <script src="../js/productos.js"></script> 
+  <script src="../js/productos_funciones.js"></script>
+  <script src="../js/bootstrap.bundle.min.js"></script>
 
   <script>
-    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-    const productos = JSON.parse(localStorage.getItem("productos")) || [];
-    const ventas = JSON.parse(localStorage.getItem("ultimaCompra")) || [];
+    // Función principal para cargar datos del resumen
+    function cargarResumen() {
+      
+      // 1. Usuarios
+      const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+      document.getElementById("totalUsuarios").innerText = usuarios.length;
 
-    document.getElementById("totalUsuarios").innerText = usuarios.length;
-    document.getElementById("totalProductos").innerText = productos.length;
+      // 2. Productos (Usando la función de tu archivo de lógica)
+      if (typeof obtenerProductos === 'function') {
+        const productos = obtenerProductos();
+        document.getElementById("totalProductos").innerText = productos.length;
+      } 
 
-    const total = ventas.reduce((sum, v) => sum + (v.precio * v.cantidad), 0);
-    document.getElementById("totalVentas").innerText = "$" + total.toLocaleString("es-CL");
+      // 3. Ventas (Usando el histórico de ventas)
+      const ventasHistorico = JSON.parse(localStorage.getItem("ventasHistorico")) || [];
+      
+      const totalVentasCalculado = ventasHistorico.reduce((sum, venta) => {
+        // Asumimos que cada 'venta' en el histórico es un array de ítems [{precio, cantidad}]
+        return sum + venta.reduce((subTotal, item) => subTotal + (item.precio * item.cantidad), 0);
+      }, 0);
+
+
+      document.getElementById("totalVentas").innerText = "$" + totalVentasCalculado.toLocaleString("es-CL");
+    }
+    
+    document.addEventListener("DOMContentLoaded", cargarResumen);
   </script>
 </body>
 </html>

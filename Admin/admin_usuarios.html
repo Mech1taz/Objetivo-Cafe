@@ -3,55 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - Usuarios</title>
+  <title>Usuarios - Objetivo Café Admin</title>
+
+    <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap"
+    rel="stylesheet">
   <link href="../css/bootstrap.min.css" rel="stylesheet">
   <link href="../css/colores.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
 </head>
+
 <body>
-  <nav class="navbar navbar-expand-sm navbar-dark">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">Objetivo Café - Admin</a>
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a href="admin_productos.html" class="nav-link">Productos</a></li>
-        <li class="nav-item"><a href="admin_usuarios.html" class="nav-link active">Usuarios</a></li>
-        <li class="nav-item"><a href="admin_ventas.html" class="nav-link">Ventas</a></li>
-        <li class="nav-item"><a href="admin_resumen.html" class="nav-link">Resumen</a></li>
-      </ul>
-    </div>
+      <a class="navbar-brand" href="../index.html">Objetivo Café - Admin</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a href="admin_resumen.html" class="nav-link"><i class="fas fa-chart-line"></i> Resumen</a></li>
+          <li class="nav-item"><a href="admin_productos.html" class="nav-link"><i class="fas fa-box-open"></i> Productos</a></li>
+          <li class="nav-item"><a href="admin_usuarios.html" class="nav-link active"><i class="fas fa-users"></i> Usuarios</a></li>
+          <li class="nav-item"><a href="admin_ventas.html" class="nav-link"><i class="fas fa-cash-register"></i> Ventas</a></li>
+          <li class="nav-item"><a href="../index.html" class="btn btn-sm btn-danger ms-2">Volver</a></li>
+        </ul>
+      </div>
+      </div>
   </nav>
 
-  <div class="container mt-5">
-    <h2 class="text-center mb-4">Usuarios Registrados</h2>
-    <table class="table table-striped">
-      <thead class="table-dark">
-        <tr>
-          <th>RUT</th>
-          <th>Nombre</th>
-          <th>Email</th>
-        </tr>
-      </thead>
-      <tbody id="tablaUsuarios"></tbody>
-    </table>
+    <div class="container mt-5">
+    <h2 class="mb-4">Gestión de Usuarios</h2>
+
+    <div class="table-responsive shadow rounded">
+      <table class="table table-striped table-hover align-middle">
+        <thead class="bg-dark text-white">
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="listaUsuarios">
+                  </tbody>
+      </table>
+    </div>
+
   </div>
 
+    <script src="../js/bootstrap.bundle.min.js"></script>
   <script>
-    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-    const tabla = document.getElementById("tablaUsuarios");
+    document.addEventListener('DOMContentLoaded', () => {
+      const listaUsuarios = document.getElementById('listaUsuarios');
+      
+      const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
 
-    function mostrarUsuarios() {
       if (usuarios.length === 0) {
-        tabla.innerHTML = `<tr><td colspan="3">No hay usuarios registrados</td></tr>`;
-      } else {
-        tabla.innerHTML = usuarios.map(u => `
-          <tr>
-            <td>${u.rut}</td>
-            <td>${u.nombre}</td>
-            <td>${u.mail}</td>
-          </tr>`).join('');
+        listaUsuarios.innerHTML = '<tr><td colspan="5" class="text-center p-3">No hay usuarios registrados.</td></tr>';
+        return;
       }
-    }
 
-    document.addEventListener("DOMContentLoaded", mostrarUsuarios);
+      usuarios.forEach((user, index) => {
+        const fila = document.createElement('tr');
+        
+        // Simulación de datos
+        const nombreDisplay = user.nombre || user.username || 'Usuario Nuevo';
+        const emailDisplay = user.email || 'Sin Email';
+        const rolDisplay = user.rol || (index === 0 ? 'Admin' : 'Cliente'); 
+        
+        fila.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${nombreDisplay}</td>
+          <td>${emailDisplay}</td>
+          <td><span class="badge ${rolDisplay === 'Admin' ? 'bg-primary' : 'bg-secondary'}">${rolDisplay}</span></td>
+          <td>
+            <button class="btn btn-sm btn-info me-2 text-white" onclick="alert('Editar usuario ID: ${index + 1}')"><i class="fas fa-edit"></i> Editar</button>
+            <button class="btn btn-sm btn-danger" onclick="alert('Eliminar usuario ID: ${index + 1}')"><i class="fas fa-trash"></i> Eliminar</button>
+          </td>
+        `;
+        listaUsuarios.appendChild(fila);
+      });
+    });
   </script>
 </body>
 </html>

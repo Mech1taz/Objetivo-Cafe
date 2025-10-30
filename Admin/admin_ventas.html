@@ -3,57 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - Ventas</title>
+  <title>Ventas - Objetivo Café Admin</title>
+
+    <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap"
+    rel="stylesheet">
   <link href="../css/bootstrap.min.css" rel="stylesheet">
   <link href="../css/colores.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
 </head>
+
 <body>
-  <nav class="navbar navbar-expand-sm navbar-dark">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">Objetivo Café - Admin</a>
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a href="admin_productos.html" class="nav-link">Productos</a></li>
-        <li class="nav-item"><a href="admin_usuarios.html" class="nav-link">Usuarios</a></li>
-        <li class="nav-item"><a href="admin_ventas.html" class="nav-link active">Ventas</a></li>
-        <li class="nav-item"><a href="admin_resumen.html" class="nav-link">Resumen</a></li>
-      </ul>
-    </div>
+      <a class="navbar-brand" href="../index.html">Objetivo Café - Admin</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a href="admin_resumen.html" class="nav-link"><i class="fas fa-chart-line"></i> Resumen</a></li>
+          <li class="nav-item"><a href="admin_productos.html" class="nav-link"><i class="fas fa-box-open"></i> Productos</a></li>
+          <li class="nav-item"><a href="admin_usuarios.html" class="nav-link"><i class="fas fa-users"></i> Usuarios</a></li>
+          <li class="nav-item"><a href="admin_ventas.html" class="nav-link active"><i class="fas fa-cash-register"></i> Ventas</a></li>
+          <li class="nav-item"><a href="../index.html" class="btn btn-sm btn-danger ms-2">Volver</a></li>
+        </ul>
+      </div>
+      </div>
   </nav>
 
-  <div class="container mt-5">
-    <h2 class="text-center mb-4">Historial de Ventas</h2>
-    <table class="table table-striped">
-      <thead class="table-dark">
-        <tr>
-          <th>Producto</th>
-          <th>Cantidad</th>
-          <th>Precio</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody id="tablaVentas"></tbody>
-    </table>
+    <div class="container mt-5">
+    <h2 class="mb-4">Registro Histórico de Ventas</h2>
+
+    <div class="table-responsive shadow rounded">
+      <table class="table table-striped table-hover align-middle">
+        <thead class="bg-dark text-white">
+          <tr>
+            <th>ID Venta</th>
+            <th>Total</th>
+            <th>Fecha</th>
+            <th>Ítems</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="listaVentas">
+                  </tbody>
+      </table>
+    </div>
+
   </div>
 
+    <script src="../js/bootstrap.bundle.min.js"></script>
   <script>
-    const ventas = JSON.parse(localStorage.getItem("ultimaCompra")) || [];
-    const tabla = document.getElementById("tablaVentas");
+    document.addEventListener('DOMContentLoaded', () => {
+      const listaVentas = document.getElementById('listaVentas');
+      
+      // Clave de localStorage para el historial de ventas
+      const ventasHistorico = JSON.parse(localStorage.getItem('ventasHistorico')) || [];
 
-    function mostrarVentas() {
-      if (ventas.length === 0) {
-        tabla.innerHTML = `<tr><td colspan="4">No hay ventas registradas</td></tr>`;
-      } else {
-        tabla.innerHTML = ventas.map(v => `
-          <tr>
-            <td>${v.nombre}</td>
-            <td>${v.cantidad}</td>
-            <td>$${v.precio}</td>
-            <td>$${v.precio * v.cantidad}</td>
-          </tr>`).join('');
+      if (ventasHistorico.length === 0) {
+        listaVentas.innerHTML = '<tr><td colspan="5" class="text-center p-3">No hay ventas registradas en el historial.</td></tr>';
+        return;
       }
-    }
 
-    document.addEventListener("DOMContentLoaded", mostrarVentas);
+      ventasHistorico.forEach((venta, index) => {
+        const fila = document.createElement('tr');
+        
+        // Calcular el total de la venta actual
+        const totalVenta = venta.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+        
+        fila.innerHTML = `
+          <td>#${1000 + index}</td>
+          <td>$${totalVenta.toLocaleString('es-CL')}</td>
+          <td>${new Date().toLocaleDateString('es-CL')}</td>
+          <td>${venta.length} ítems</td>
+          <td>
+            <button class="btn btn-sm btn-info me-2 text-white" onclick="alert('Detalle de Venta #${1000 + index}: ${venta.map(i => i.nombre).join(', ')}')">
+              <i class="fas fa-search"></i> Ver
+            </button>
+          </td>
+        `;
+        listaVentas.appendChild(fila);
+      });
+    });
   </script>
 </body>
 </html>
